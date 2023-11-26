@@ -36,12 +36,12 @@ Bu proje, Amiral Battı oyununu basit bir kullanıcı arayüzü ile oynamak içi
 4. Terminal veya komut istemcisinde proje dizinine gidin ve şu komutu çalıştırarak oyunu başlatın:
 
     ```
-    python amiral_batti.py
+    python main.py
     ```
 
 ## Geliştirici
 
-- [Mehmet] - [mehmet-2023]
+- Mehmet - mehmet-2023
 
 ## Lisans
 
