@@ -21,7 +21,7 @@ Bu proje, Amiral Battı oyununu basit bir kullanıcı arayüzü ile oynamak içi
 
 ## Ekran Görüntüsü
 
-[https://ibb.co/vh6T6qp]
+[Ekran Görüntüsü](https://i.ibb.co/cwSZS30/resim-2023-11-26-141314688.png)
 
 ## Kurulum
 
