@@ -1,7 +1,6 @@
 # Amiral Battı Oyunu
 
-Bu proje, Amiral Battı oyununu basit bir kullanıcı arayüzü ile oynamak için Python ve Tkinter kullanılarak oluşturulmuştur. Rakip stratejileri, kendi gemilerinizi koyabilme ve karşılıklı atış ekranı gibi özellikler içermektedir. Rakibin atışlarının çok hızlı olması gibi sıkıntıları var ama oynarken eğleneceğinizi düşünüyorum.
-
+Bu proje, Amiral Battı oyununu basit bir kullanıcı arayüzü ile oynamak için Python ve Tkinter kullanılarak oluşturulmuştur. Rakip stratejileri, kendi gemilerinizi koyabilme ve karşılıklı atış ekranı gibi özellikler içermektedir.
 ## Nasıl Oynanır
 
 1. İlk önce kendi tahtanıza 1x1 boyutundaki gemiyi yerleştirmelisiniz.
