@@ -2,6 +2,7 @@ import random
 import time
 from tkinter import *
 from tkinter import ttk
+import threading as th  
 
 #Değişkenler...
 global ships
@@ -9,7 +10,6 @@ ships = []
 
 global enabled2
 enabled2 = False
-
 #Gemi Koyma Fonksiyonu
 #3X1 Boyutlu Gemileri Sıra Halinde Koyma Eksik
 def cell_click(event):
@@ -19,11 +19,13 @@ def cell_click(event):
     global enabled1
     global enabled2
     global enabled3
+    global col
+    global row
     if enabled == "Gemi1":
         widget = event.widget
-        col = widget.grid_info()['column']
-        row = widget.grid_info()['row']
-        ships.append(str({row})+","+str({col}))
+        oldcol = widget.grid_info()['column']
+        oldrow = widget.grid_info()['row']
+        ships.append(str({oldrow})+","+str({oldcol}))
         widget.configure(bg='black', fg='white')
         enabled=False
         info.config(text="3x1 Boyutundaki Gemiyi Koy")
@@ -49,26 +51,32 @@ def cell_click(event):
             if current_color == "black":
                 info.config(text="Geminin Üstüne Gemi Konulmaz.")
             else:
-                col = widget.grid_info()['column']
-                row = widget.grid_info()['row']
-                ships.append(str({row})+","+str({col}))
-                widget.configure(bg='black', fg='white')
-                enabled2 = False
+                if widget.grid_info()['column'] == col+1 and widget.grid_info()['row']==row or  widget.grid_info()['column']==col-1 and widget.grid_info()['row']==row or widget.grid_info()['row']==row-1 and widget.grid_info()['column']==col or widget.grid_info()['row']==row+1 and widget.grid_info()['column']==col:
+                    col = widget.grid_info()['column']
+                    row = widget.grid_info()['row']
+                    ships.append(str({row})+","+str({col}))
+                    widget.configure(bg='black', fg='white')
+                    enabled2 = False
+                else:
+                    info.config(text="Hatalı Seçim")
         elif enabled2 == False and enabled3 == True:
             widget = event.widget
             current_color = widget.cget("bg")
             if current_color == "black":
                 info.config(text="Geminin Üstüne Gemi Konulmaz.")
             else:
-                col = widget.grid_info()['column']
-                row = widget.grid_info()['row']
-                ships.append(str({row})+","+str({col}))
-                widget.configure(bg='black', fg='white')
-                info.config(text="3x1 Boyutundaki Diğer Gemiyi Koy")
-                enabled = "Gemi3"
-                enabled1 = True
-                enabled2 = True
-                enabled3 = True
+                if widget.grid_info()['column'] == col+1 and widget.grid_info()['row']==row or  widget.grid_info()['column']==col-1 and widget.grid_info()['row']==row or widget.grid_info()['row']==row-1 and widget.grid_info()['column']==col or widget.grid_info()['row']==row+1 and widget.grid_info()['column']==col:
+                    col = widget.grid_info()['column']
+                    row = widget.grid_info()['row']
+                    ships.append(str({row})+","+str({col}))
+                    widget.configure(bg='black', fg='white')
+                    info.config(text="3x1 Boyutundaki Diğer Gemiyi Koy")
+                    enabled = "Gemi3"
+                    enabled1 = True
+                    enabled2 = True
+                    enabled3 = True
+                else:
+                    info.config(text="Hatalı Seçim")
     elif enabled == "Gemi3":
         if enabled1 == True:
             widget = event.widget
@@ -87,30 +95,36 @@ def cell_click(event):
             if current_color == "black":
                 info.config(text="Geminin Üstüne Gemi Konulmaz.")
             else:
-                col = widget.grid_info()['column']
-                row = widget.grid_info()['row']
-                ships.append(str({row})+","+str({col}))
-                widget.configure(bg='black', fg='white')
-                enabled2 = False
+                if widget.grid_info()['column'] == col+1 and widget.grid_info()['row']==row or  widget.grid_info()['column']==col-1 and widget.grid_info()['row']==row or widget.grid_info()['row']==row-1 and widget.grid_info()['column']==col or widget.grid_info()['row']==row+1 and widget.grid_info()['column']==col:
+                    col = widget.grid_info()['column']
+                    row = widget.grid_info()['row']
+                    ships.append(str({row})+","+str({col}))
+                    widget.configure(bg='black', fg='white')
+                    enabled2 = False
+                else:
+                    info.config(text="Hatalı Seçim")
         elif enabled2 == False and enabled3 == True:
             widget = event.widget
             current_color = widget.cget("bg")
             if current_color == "black":
                 info.config(text="Geminin Üstüne Gemi Konulmaz.")
             else:
-                col = widget.grid_info()['column']
-                row = widget.grid_info()['row']
-                ships.append(str({row})+","+str({col}))
-                widget.configure(bg='black', fg='white')
-                info.config(text="Bu kadardı. Şimdi Rakibi Bekle")
-                gemi1_int = random.randint(1,4)
-                gemi11_int=random.randint(1,7)
-                gemi2_int = random.randint(1,4)
-                gemi22_int = random.randint(1,4)
-                rakip_gemi = [[random.randint(1,7),random.randint(1,7)],[gemi1_int,gemi11_int],[(gemi1_int+1),gemi11_int],[(gemi1_int+2),gemi11_int],[gemi22_int,gemi2_int],[gemi22_int,(gemi2_int+1)],[gemi22_int,(gemi2_int+2)]]
-                info.config(text="Rakibe Atış Yap")
-                enabled = False
-                enabled2 = True
+                if widget.grid_info()['column'] == col+1 and widget.grid_info()['row']==row or  widget.grid_info()['column']==col-1 and widget.grid_info()['row']==row or widget.grid_info()['row']==row-1 and widget.grid_info()['column']==col or widget.grid_info()['row']==row+1 and widget.grid_info()['column']==col:
+                    col = widget.grid_info()['column']
+                    row = widget.grid_info()['row']
+                    ships.append(str({row})+","+str({col}))
+                    widget.configure(bg='black', fg='white')
+                    info.config(text="Bu kadardı. Şimdi Rakibi Bekle")
+                    gemi1_int = random.randint(1,4)
+                    gemi11_int=random.randint(1,7)
+                    gemi2_int = random.randint(1,4)
+                    gemi22_int = random.randint(1,4)
+                    rakip_gemi = [[random.randint(1,7),random.randint(1,7)],[gemi1_int,gemi11_int],[(gemi1_int+1),gemi11_int],[(gemi1_int+2),gemi11_int],[gemi22_int,gemi2_int],[gemi22_int,(gemi2_int+1)],[gemi22_int,(gemi2_int+2)]]
+                    info.config(text="Rakibe Atış Yap")
+                    enabled = False
+                    enabled2 = True
+                else:
+                    info.config(text="Hatalı Seçim")
 #Değişkenler..
 global atilan
 atilan = []
@@ -119,6 +133,12 @@ global cnt
 rakip_cnt = 0
 cnt = 0
 
+def ara_fnct():
+    global atis
+    rakip_hamle(atis)
+def ara_fnct2():
+    global atis2
+    rakip_hamle(atis2)
 #Rakibin Stratejisi
 def rakip_hamle(atis):
     global enabled2
@@ -178,7 +198,9 @@ def rakip_hamle(atis):
                 info.config(text="Oyunu Rakip Kazandı!")
                 enabled2 = False
             else:
-                rakip_hamle(atis2)
+                enabled2 = False
+                timer = th.Timer(1.0, ara_fnct2)  
+                timer.start()  
         else:
             info.config(text="Rakip ıskaladı.")
             cell.config(bg="red")
@@ -218,33 +240,48 @@ def cell_click2(event):
                 widget.config(bg="red")
                 info.config(text="Iska. Sıra rakipte")
                 enabled2 = False
-                win = True
-                if not risabet:
-                    while True:
-                        atis = [random.randint(1, 7), random.randint(1, 7)]
-                        atisf = atis
-                        cell = cells[(atis[0], atis[1])]
-                        if cell.cget("bg") not in ["green", "red"]:
-                            break
-                    atilan.append(atis)
-                    if cell.cget("bg") == "black":
-                        cell.configure(bg='green', fg='white')
-                        info.config(text="Rakip İsabetli Atış Yaptı")
-                        rakip_cnt += 1
-                        if rakip_cnt == 7:
-                            info.config(text="Oyunu Rakip Kazandı!")
-                            enabled2 = False
+                def atis_rakip(): 
+                    global risabet
+                    global atis2
+                    global enabled2
+                    global rakip_gemi
+                    global rakip_cnt
+                    global cnt
+                    global cells
+                    global atis
+                    global atilan
+                    win = True
+                    if not risabet:
+                        while True:
+                            atis = [random.randint(1, 7), random.randint(1, 7)]
+                            atisf = atis
+                            cell = cells[(atis[0], atis[1])]
+                            if cell.cget("bg") not in ["green", "red"]:
+                                break
+                        atilan.append(atis)
+                        if cell.cget("bg") == "black":
+                            cell.configure(bg='green', fg='white')
+                            info.config(text="Rakip İsabetli Atış Yaptı")
+                            rakip_cnt += 1
+                            if rakip_cnt == 7:
+                                info.config(text="Oyunu Rakip Kazandı!")
+                                enabled2 = False
+                            else:
+                                rakip_hamle(atisf)
+                                risabet = True
+                                enabled2 = True
                         else:
-                            rakip_hamle(atisf)
-                            risabet = True
+                            win = False
+                            info.config(text="Rakip Iskaladı. Sıra Sende")
+                            cell.configure(bg='red', fg='white')
                             enabled2 = True
                     else:
-                        win = False
-                        info.config(text="Rakip Iskaladı. Sıra Sende")
-                        cell.configure(bg='red', fg='white')
-                        enabled2 = True
-                else:
-                    rakip_hamle(atis)
+                        enabled2 = False
+                        timer = th.Timer(1.0, ara_fnct)  
+                        timer.start() 
+                enabled2 = False
+                timer = th.Timer(1.0, atis_rakip)  
+                timer.start()
         else:
             info.config(text="Geçersiz Atış!")
 
